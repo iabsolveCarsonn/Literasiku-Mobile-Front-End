@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:literasikuu/pages/daftarpencarian.dart';
-import 'package:literasikuu/pages/bookmark.dart';
-import 'package:literasikuu/pages/akun.dart';
+import 'package:literasikuu/footer.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -14,58 +12,7 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     // final size = MediaQuery.of(context).size;
     return Scaffold(
-      bottomNavigationBar: NavigationBar(
-        selectedIndex: 0,
-        onDestinationSelected: (index) {
-          switch (index) {
-            case 0:
-              Navigator.pushReplacement(
-                context,
-                MaterialPageRoute(builder: (_) => const HomePage()),
-              );
-              break;
-
-            case 1:
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (_) => const DaftarPencarianPage()),
-              );
-              break;
-
-            case 2:
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (_) => const BookmarkPage()),
-              );
-              break;
-
-            case 3:
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (_) => const AkunPage()),
-              );
-              break;
-          }
-        },
-        destinations: const [
-          NavigationDestination(
-            icon: Icon(Icons.home_outlined),
-            selectedIcon: Icon(Icons.home),
-            label: 'Home',
-          ),
-          NavigationDestination(icon: Icon(Icons.search), label: 'Search'),
-          NavigationDestination(
-            icon: Icon(Icons.bookmark_border),
-            selectedIcon: Icon(Icons.bookmark),
-            label: 'Bookmark',
-          ),
-          NavigationDestination(
-            icon: Icon(Icons.person_outline),
-            selectedIcon: Icon(Icons.person),
-            label: 'Acc',
-          ),
-        ],
-      ),
+      bottomNavigationBar: Footer(selectedIndex: 0),
       body: SafeArea(
         child: LayoutBuilder(
           builder: (context, constraints) {

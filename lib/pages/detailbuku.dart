@@ -6,12 +6,8 @@ class DetailBukuPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Detail Buku'),
-      ),
-      body: const Center(
-        child: Text('Halaman Detail Buku'),
-      ),
+      appBar: AppBar(title: const Text('Detail Buku')),
+      body: const Center(child: Text('Halaman Detail Buku')),
     );
   }
 }

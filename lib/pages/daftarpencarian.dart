@@ -6,12 +6,8 @@ class DaftarPencarianPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Daftar Pencarian'),
-      ),
-      body: const Center(
-        child: Text('Halaman Daftar Pencarian'),
-      ),
+      appBar: AppBar(title: const Text('Daftar Pencarian')),
+      body: const Center(child: Text('Halaman Daftar Pencarian')),
     );
   }
 }

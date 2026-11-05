@@ -14,69 +14,58 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     // final size = MediaQuery.of(context).size;
     return Scaffold(
-bottomNavigationBar: NavigationBar(
-  selectedIndex: 0,
-  onDestinationSelected: (index) {
-    switch (index) {
-      case 0:
-        Navigator.pushReplacement(
-          context,
-          MaterialPageRoute(
-            builder: (_) => const HomePage(),
-          ),
-        );
-        break;
+      bottomNavigationBar: NavigationBar(
+        selectedIndex: 0,
+        onDestinationSelected: (index) {
+          switch (index) {
+            case 0:
+              Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(builder: (_) => const HomePage()),
+              );
+              break;
 
-      case 1:
-        Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (_) => const DaftarPencarianPage(),
-          ),
-        );
-        break;
+            case 1:
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (_) => const DaftarPencarianPage()),
+              );
+              break;
 
-      case 2:
-        Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (_) => const BookmarkPage(),
-          ),
-        );
-        break;
+            case 2:
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (_) => const BookmarkPage()),
+              );
+              break;
 
-      case 3:
-        Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (_) => const AkunPage(),
+            case 3:
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (_) => const AkunPage()),
+              );
+              break;
+          }
+        },
+        destinations: const [
+          NavigationDestination(
+            icon: Icon(Icons.home_outlined),
+            selectedIcon: Icon(Icons.home),
+            label: 'Home',
           ),
-        );
-        break;
-    }
-  },
-  destinations: const [
-    NavigationDestination(
-      icon: Icon(Icons.home_outlined),
-      selectedIcon: Icon(Icons.home),
-      label: 'Home',
-    ),
-    NavigationDestination(
-      icon: Icon(Icons.search),
-      label: 'Search',
-    ),
-    NavigationDestination(
-      icon: Icon(Icons.bookmark_border),
-      selectedIcon: Icon(Icons.bookmark),
-      label: 'Bookmark',
-    ),
-    NavigationDestination(
-      icon: Icon(Icons.person_outline),
-      selectedIcon: Icon(Icons.person),
-      label: 'Acc',
-    ),
-  ],
-),
+          NavigationDestination(icon: Icon(Icons.search), label: 'Search'),
+          NavigationDestination(
+            icon: Icon(Icons.bookmark_border),
+            selectedIcon: Icon(Icons.bookmark),
+            label: 'Bookmark',
+          ),
+          NavigationDestination(
+            icon: Icon(Icons.person_outline),
+            selectedIcon: Icon(Icons.person),
+            label: 'Acc',
+          ),
+        ],
+      ),
       body: SafeArea(
         child: LayoutBuilder(
           builder: (context, constraints) {
@@ -149,10 +138,7 @@ bottomNavigationBar: NavigationBar(
 
                 const Text(
                   'Hari baik dimulai dari satu bacaan.',
-                  style: TextStyle(
-                    fontSize: 18,
-                    color: Colors.black54,
-                  ),
+                  style: TextStyle(fontSize: 18, color: Colors.black54),
                 ),
 
                 const SizedBox(height: 30),
@@ -199,21 +185,14 @@ bottomNavigationBar: NavigationBar(
                       icon: Icons.edit_note_outlined,
                       title: 'Literasi',
                     ),
-                    CategoryItem(
-                      icon: Icons.science_outlined,
-                      title: 'Sains',
-                    ),
-                    CategoryItem(
-                      icon: Icons.menu_book_outlined,
-                      title: 'Esai',
-                    ),
+                    CategoryItem(icon: Icons.science_outlined, title: 'Sains'),
+                    CategoryItem(icon: Icons.menu_book_outlined, title: 'Esai'),
                   ],
                 ),
 
                 const SizedBox(height: 30),
 
                 /// POPULAR BOOK
-
                 Row(
                   children: [
                     Expanded(
@@ -245,22 +224,19 @@ bottomNavigationBar: NavigationBar(
                       BookCard(
                         title: 'Seni Menikmati Sepi',
                         rating: '4,8',
-                        image:
-                            'https://picsum.photos/200/300?random=1',
+                        image: 'https://picsum.photos/200/300?random=1',
                       ),
                       SizedBox(width: 16),
                       BookCard(
                         title: 'Belajar Cara Belajar',
                         rating: '4,9',
-                        image:
-                            'https://picsum.photos/200/300?random=2',
+                        image: 'https://picsum.photos/200/300?random=2',
                       ),
                       SizedBox(width: 16),
                       BookCard(
                         title: 'Sains di Sekitar Kita',
                         rating: '4,8',
-                        image:
-                            'https://picsum.photos/200/300?random=3',
+                        image: 'https://picsum.photos/200/300?random=3',
                       ),
                     ],
                   ),
@@ -296,8 +272,7 @@ class EditorialCard extends StatelessWidget {
           Expanded(
             flex: 3,
             child: Column(
-              crossAxisAlignment:
-                  CrossAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 const Text(
                   'PILIHAN REDAKSI',
@@ -319,10 +294,7 @@ class EditorialCard extends StatelessWidget {
                 const SizedBox(height: 12),
                 const Text(
                   'Esai untuk merawat jeda dan rasa ingin tahu.',
-                  style: TextStyle(
-                    color: Colors.black54,
-                    fontSize: 16,
-                  ),
+                  style: TextStyle(color: Colors.black54, fontSize: 16),
                 ),
                 const Spacer(),
                 RichText(
@@ -333,19 +305,17 @@ class EditorialCard extends StatelessWidget {
                       fontSize: 18,
                     ),
                     children: [
-                      TextSpan(
-                        text: 'Jelajahi buku ',
-                      ),
+                      TextSpan(text: 'Jelajahi buku '),
                       WidgetSpan(
                         child: Icon(
                           Icons.arrow_forward,
                           size: 20,
                           color: Color(0xFF445A46),
                         ),
-                      )
+                      ),
                     ],
                   ),
-                )
+                ),
               ],
             ),
           ),
@@ -362,10 +332,7 @@ class EditorialCard extends StatelessWidget {
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(12),
                     boxShadow: const [
-                      BoxShadow(
-                        blurRadius: 8,
-                        color: Colors.black12,
-                      )
+                      BoxShadow(blurRadius: 8, color: Colors.black12),
                     ],
                   ),
                   child: ClipRRect(
@@ -392,11 +359,7 @@ class CategoryItem extends StatelessWidget {
   final IconData icon;
   final String title;
 
-  const CategoryItem({
-    super.key,
-    required this.icon,
-    required this.title,
-  });
+  const CategoryItem({super.key, required this.icon, required this.title});
 
   @override
   Widget build(BuildContext context) {
@@ -410,11 +373,7 @@ class CategoryItem extends StatelessWidget {
             borderRadius: BorderRadius.circular(20),
           ),
           child: Center(
-            child: Icon(
-              icon,
-              size: 38,
-              color: const Color(0xFF445A46),
-            ),
+            child: Icon(icon, size: 38, color: const Color(0xFF445A46)),
           ),
         ),
         const SizedBox(height: 10),
@@ -444,21 +403,15 @@ class BookCard extends StatelessWidget {
     return SizedBox(
       width: 195,
       child: Column(
-        crossAxisAlignment:
-            CrossAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Container(
             height: 220,
             width: double.infinity,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(10),
-            ),
+            decoration: BoxDecoration(borderRadius: BorderRadius.circular(10)),
             child: ClipRRect(
               borderRadius: BorderRadius.circular(10),
-              child: Image.network(
-                image,
-                fit: BoxFit.cover,
-              ),
+              child: Image.network(image, fit: BoxFit.cover),
             ),
           ),
 
@@ -468,31 +421,21 @@ class BookCard extends StatelessWidget {
             title,
             maxLines: 2,
             overflow: TextOverflow.ellipsis,
-            style: const TextStyle(
-              fontSize: 16,
-              fontWeight: FontWeight.w700,
-            ),
+            style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w700),
           ),
 
           const SizedBox(height: 8),
 
           Row(
             children: [
-              const Icon(
-                Icons.star,
-                size: 18,
-                color: Color(0xFF445A46),
-              ),
+              const Icon(Icons.star, size: 18, color: Color(0xFF445A46)),
               const SizedBox(width: 4),
               Text(
                 rating,
-                style: const TextStyle(
-                  fontSize: 16,
-                  color: Colors.black54,
-                ),
+                style: const TextStyle(fontSize: 16, color: Colors.black54),
               ),
             ],
-          )
+          ),
         ],
       ),
     );

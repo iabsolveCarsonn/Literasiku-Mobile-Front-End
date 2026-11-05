@@ -6,12 +6,8 @@ class AkunPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Akun'),
-      ),
-      body: const Center(
-        child: Text('Halaman Akun'),
-      ),
+      appBar: AppBar(title: const Text('Akun')),
+      body: const Center(child: Text('Halaman Akun')),
     );
   }
 }

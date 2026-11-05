@@ -6,12 +6,8 @@ class BookmarkPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Bookmark'),
-      ),
-      body: const Center(
-        child: Text('Halaman  Bookmark'),
-      ),
+      appBar: AppBar(title: const Text('Bookmark')),
+      body: const Center(child: Text('Halaman  Bookmark')),
     );
   }
 }

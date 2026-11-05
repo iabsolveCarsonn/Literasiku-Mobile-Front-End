@@ -35,6 +35,5 @@ literasiku/
 1. Pastikan Flutter SDK sudah terpasang di komputer Anda.
 2. Jalankan perintah:
    ```bash
-   flutter pub get
    flutter run
    ```

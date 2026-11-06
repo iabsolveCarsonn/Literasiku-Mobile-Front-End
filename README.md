@@ -16,15 +16,12 @@ Halaman aplikasi diletakkan di dalam folder `lib/pages/`:
 ```text
 literasiku/
 ├── lib/
-│   ├── models/          # Model data (misal: Buku, User)
 │   ├── pages/           # Halaman tampilan antarmuka (UI)
 │   │   ├── akun.dart
 │   │   ├── daftarpencarian.dart
 │   │   ├── detailbuku.dart
 │   │   ├── home.dart
 │   │   └── login.dart
-│   ├── services/        # Komunikasi API / database / storage
-│   ├── widgets/         # Komponen reusable (Button kustom, Card, dsb)
 │   └── main.dart        # Titik masuk utama aplikasi (Entry Point)
 ├── pubspec.yaml         # Dependensi dan aset Flutter
 └── README.md

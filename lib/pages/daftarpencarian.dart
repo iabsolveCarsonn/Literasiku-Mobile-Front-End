@@ -396,18 +396,6 @@ class _DaftarPencarianPageState extends State<DaftarPencarianPage> {
                 )
               else
                 ...books.map((book) => _buildBookCard(book)),
-
-              const SizedBox(height: 8),
-
-              // Catatan Kaki Katalog
-              const Text(
-                'Katalog contoh Opik · Judul dan metadata ilustratif.',
-                style: TextStyle(
-                  fontSize: 12.5,
-                  fontWeight: FontWeight.w400,
-                  color: _mutedText,
-                ),
-              ),
             ],
           ),
         ),

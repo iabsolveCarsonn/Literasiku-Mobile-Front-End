@@ -16,7 +16,8 @@ Halaman aplikasi diletakkan di dalam folder `lib/pages/`:
 ```text
 literasiku/
 ├── assets/
-│   ├── images/ # tempat untuk assets dengan type jpg.png.dll
+│   ├── font/ # Tempat untuk font text
+│   ├── images/ # tempat untuk ganbar type jpg.png.dll
 ├── lib/
 │   ├── pages/           # Halaman tampilan antarmuka (UI)
 │   │   ├── akun.dart
@@ -24,7 +25,7 @@ literasiku/
 │   │   ├── detailbuku.dart
 │   │   ├── home.dart
 │   │   └── login.dart
-│   └── main.dart        # Titik masuk utama aplikasi (Entry Point)
+│   └── main.dart        # masuk utama aplikasi (Entry Point)
 └── README.md
 ```
 

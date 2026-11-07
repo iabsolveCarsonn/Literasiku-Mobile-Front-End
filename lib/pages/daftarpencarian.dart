@@ -18,7 +18,7 @@ class BookItem {
     required this.year,
     required this.rating,
     required this.coverAsset,
-    this.isBookmarked = false,
+    this.isBookmarked = true,
   });
 }
 
@@ -570,19 +570,48 @@ class _DaftarPencarianPageState extends State<DaftarPencarianPage> {
                 ),
               ),
 
-              // Tombol Bookmark di kanan
+              // Tombol Checklist Bookmark di kanan (menggunakan materi Stack)
               IconButton(
+                tooltip: book.isBookmarked
+                    ? 'Tersimpan di bookmark'
+                    : 'Simpan ke bookmark',
+                hoverColor: _accentGreen.withValues(alpha: 0.08),
+                splashColor: _accentGreen.withValues(alpha: 0.15),
+                highlightColor: _accentGreen.withValues(alpha: 0.1),
                 onPressed: () {
                   setState(() {
                     book.isBookmarked = !book.isBookmarked;
                   });
                 },
-                icon: Icon(
-                  book.isBookmarked
-                      ? Icons.bookmark_added_rounded
-                      : Icons.bookmark_added_outlined,
-                  color: _accentGreen,
-                  size: 23,
+                icon: SizedBox(
+                  width: 26,
+                  height: 28,
+                  child: Stack(
+                    alignment: Alignment.center,
+                    children: [
+                      // Icon dasar bookmark outline
+                      Icon(
+                        Icons.bookmark_border_rounded,
+                        size: 26,
+                        color: book.isBookmarked ? _accentGreen : _mutedText,
+                      ),
+                      // Tanda centang tebal dan presisi di dalam bookmark
+                      if (book.isBookmarked)
+                        Positioned(
+                          top: 6,
+                          child: SizedBox(
+                            width: 7,
+                            height: 11,
+                            child: CustomPaint(
+                              painter: _CheckmarkPainter(
+                                color: _accentGreen,
+                                strokeWidth: 2.3,
+                              ),
+                            ),
+                          ),
+                        ),
+                    ],
+                  ),
                 ),
               ),
             ],
@@ -666,4 +695,40 @@ class _DaftarPencarianPageState extends State<DaftarPencarianPage> {
       ),
     );
   }
+}
+
+/// CustomPainter untuk menggambar tanda centang yang tebal dan proporsional
+/// di dalam icon bookmark, persis seperti pada desain Checklist-Icon.png
+class _CheckmarkPainter extends CustomPainter {
+  final Color color;
+  final double strokeWidth;
+
+  const _CheckmarkPainter({
+    required this.color,
+    this.strokeWidth = 2.3,
+  });
+
+  @override
+  void paint(Canvas canvas, Size size) {
+    final paint = Paint()
+      ..color = color
+      ..style = PaintingStyle.stroke
+      ..strokeWidth = strokeWidth
+      ..strokeCap = StrokeCap.round
+      ..strokeJoin = StrokeJoin.round;
+
+    final path = Path();
+    // Titik awal kaki kiri pendek
+    path.moveTo(size.width * 0.12, size.height * 0.46);
+    // Sudut siku bawah (vertex)
+    path.lineTo(size.width * 0.42, size.height * 0.88);
+    // Ujung kaki kanan panjang
+    path.lineTo(size.width * 0.92, size.height * 0.16);
+
+    canvas.drawPath(path, paint);
+  }
+
+  @override
+  bool shouldRepaint(covariant _CheckmarkPainter oldDelegate) =>
+      oldDelegate.color != color || oldDelegate.strokeWidth != strokeWidth;
 }

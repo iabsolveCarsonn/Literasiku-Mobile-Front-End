@@ -25,7 +25,6 @@ literasiku/
 │   │   ├── home.dart
 │   │   └── login.dart
 │   └── main.dart        # Titik masuk utama aplikasi (Entry Point)
-├── pubspec.yaml         # Dependensi dan aset Flutter
 └── README.md
 ```
 

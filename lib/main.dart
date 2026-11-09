@@ -1,9 +1,5 @@
 import 'package:flutter/material.dart';
-import 'pages/akun.dart';
-import 'pages/daftarpencarian.dart';
-import 'pages/detailbuku.dart';
-import 'pages/home.dart';
-import 'pages/login.dart';
+import 'navigation/main_navigation.dart';
 
 void main() {
   runApp(const MyApp());
@@ -26,14 +22,8 @@ class MyApp extends StatelessWidget {
         ),
         useMaterial3: true,
       ),
-      home: const DaftarPencarianPage(),
-      routes: {
-        '/login': (context) => const LoginPage(),
-        '/home': (context) => const HomePage(),
-        '/pencarian': (context) => const DaftarPencarianPage(),
-        '/detail': (context) => const DetailBukuPage(),
-        '/akun': (context) => const AkunPage(),
-      },
+      initialRoute: AppRoutes.main,
+      routes: AppRoutes.routes,
     );
   }
 }

@@ -43,7 +43,6 @@ class _DaftarPencarianPageState extends State<DaftarPencarianPage> {
   String _selectedGenre = 'Semua genre';
   String _selectedTingkat = 'Semua tingkat';
   String _selectedTahun = 'Semua tahun';
-  int _selectedNavIndex = 1; // Search tab active
 
   final List<String> _genreOptions = [
     'Semua genre',
@@ -400,7 +399,6 @@ class _DaftarPencarianPageState extends State<DaftarPencarianPage> {
           ),
         ),
       ),
-      bottomNavigationBar: _buildBottomNavigationBar(),
     );
   }
 
@@ -611,76 +609,6 @@ class _DaftarPencarianPageState extends State<DaftarPencarianPage> {
           height: 26,
         ),
       ],
-    );
-  }
-
-  Widget _buildBottomNavigationBar() {
-    final items = [
-      (icon: Icons.home_outlined, label: 'Home'),
-      (icon: Icons.search_rounded, label: 'Search'),
-      (icon: Icons.bookmark_border_rounded, label: 'Bookmark'),
-      (icon: Icons.person_outline_rounded, label: 'Acc'),
-    ];
-
-    return Container(
-      decoration: const BoxDecoration(
-        color: _bgColor,
-        border: Border(
-          top: BorderSide(
-            color: _pillBg,
-            width: 1.2,
-          ),
-        ),
-      ),
-      child: SafeArea(
-        top: false,
-        child: Padding(
-          padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 12),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: List.generate(items.length, (index) {
-              final item = items[index];
-              final isSelected = _selectedNavIndex == index;
-              return GestureDetector(
-                behavior: HitTestBehavior.opaque,
-                onTap: () {
-                  setState(() {
-                    _selectedNavIndex = index;
-                  });
-                },
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Container(
-                      width: 56,
-                      height: 32,
-                      decoration: BoxDecoration(
-                        color: isSelected ? _pillBg : Colors.transparent,
-                        borderRadius: BorderRadius.circular(16),
-                      ),
-                      child: Icon(
-                        item.icon,
-                        size: 22,
-                        color: isSelected ? _primaryText : _mutedText,
-                      ),
-                    ),
-                    const SizedBox(height: 4),
-                    Text(
-                      item.label,
-                      style: TextStyle(
-                        fontSize: 12,
-                        fontWeight:
-                            isSelected ? FontWeight.w600 : FontWeight.w400,
-                        color: isSelected ? _primaryText : _mutedText,
-                      ),
-                    ),
-                  ],
-                ),
-              );
-            }),
-          ),
-        ),
-      ),
     );
   }
 }

@@ -274,26 +274,6 @@ class AkunPage extends StatelessWidget {
           ),
         ),
       ),
-
-      bottomNavigationBar: NavigationBar(
-        selectedIndex: 3,
-        backgroundColor: const Color(0xFFFCFCF6),
-        indicatorColor: sageGreen,
-        surfaceTintColor: Colors.transparent,
-        destinations: const [
-          NavigationDestination(icon: Icon(Icons.home_outlined), label: 'Home'),
-          NavigationDestination(icon: Icon(Icons.search), label: 'Search'),
-          NavigationDestination(
-            icon: Icon(Icons.bookmark_border),
-            label: 'Bookmark',
-          ),
-          NavigationDestination(
-            icon: Icon(Icons.person_outline),
-            selectedIcon: Icon(Icons.person),
-            label: 'Acc',
-          ),
-        ],
-      ),
     );
   }
 

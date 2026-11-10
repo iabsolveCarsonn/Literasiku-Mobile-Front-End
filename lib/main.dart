@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'navigation/main_navigation.dart';
+import 'pages/login.dart';
 
 void main() {
   runApp(const MyApp());
@@ -22,8 +23,9 @@ class MyApp extends StatelessWidget {
         ),
         useMaterial3: true,
       ),
-      initialRoute: AppRoutes.main,
-      routes: AppRoutes.routes,
+      // initialRoute: AppRoutes.main,
+      // routes: AppRoutes.routes,
+      home: const LoginPage(),
     );
   }
 }

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:literasikuu/pages/home.dart';
-import 'package:literasikuu/footer.dart';
 
 void main() {
   runApp(const LiterasikuApp());
@@ -13,7 +12,7 @@ class LiterasikuApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: Scaffold(body: HomePage(), bottomNavigationBar: Footer()),
+      home: Scaffold(body: HomePage()),
     );
   }
 }

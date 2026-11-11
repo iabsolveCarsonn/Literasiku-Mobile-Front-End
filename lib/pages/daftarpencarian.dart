@@ -1,26 +1,7 @@
 import 'package:flutter/material.dart';
-
-class BookItem {
-  final String title;
-  final String author;
-  final String genre;
-  final String educationLevel;
-  final String year;
-  final String rating;
-  final String coverAsset;
-  bool isBookmarked;
-
-  BookItem({
-    required this.title,
-    required this.author,
-    required this.genre,
-    required this.educationLevel,
-    required this.year,
-    required this.rating,
-    required this.coverAsset,
-    this.isBookmarked = true,
-  });
-}
+import 'package:literasikuu/footer.dart';
+import 'package:literasikuu/book.dart';
+import 'package:literasikuu/book_repisitory.dart';
 
 class DaftarPencarianPage extends StatefulWidget {
   const DaftarPencarianPage({super.key});
@@ -58,52 +39,22 @@ class _DaftarPencarianPageState extends State<DaftarPencarianPage> {
     'Perguruan Tinggi',
   ];
 
-  final List<String> _tahunOptions = [
-    'Semua tahun',
-    '2025',
-    '2024',
-    '2023',
-  ];
+  final List<String> _tahunOptions = ['Semua tahun', '2025', '2024', '2023'];
 
-  final List<BookItem> _allBooks = [
-    BookItem(
-      title: 'Seni Menikmati Sepi',
-      author: 'Laras Kinanti',
-      genre: 'Esai',
-      educationLevel: 'Umum',
-      year: '2024',
-      rating: '4,8',
-      coverAsset: 'assets/images/seni_menikmati_sepi.png',
-    ),
-    BookItem(
-      title: 'Belajar Cara Belajar',
-      author: 'Nadia Aksara',
-      genre: 'Pendidikan',
-      educationLevel: 'Perguruan Tinggi',
-      year: '2025',
-      rating: '4,9',
-      coverAsset: 'assets/images/belajar_cara_belajar.png',
-    ),
-    BookItem(
-      title: 'Merawat Kata',
-      author: 'Bima Pradana',
-      genre: 'Literasi',
-      educationLevel: 'SMA/SMK',
-      year: '2023',
-      rating: '4,7',
-      coverAsset: 'assets/images/merawat_kata.png',
-    ),
-  ];
+  List<BookItem> get _allBooks => BookRepository.books;
 
   List<BookItem> get _filteredBooks {
     final query = _searchController.text.trim().toLowerCase();
     return _allBooks.where((book) {
-      final matchesQuery = query.isEmpty ||
+      final matchesQuery =
+          query.isEmpty ||
           book.title.toLowerCase().contains(query) ||
           book.author.toLowerCase().contains(query);
-      final matchesGenre = _selectedGenre == 'Semua genre' ||
+      final matchesGenre =
+          _selectedGenre == 'Semua genre' ||
           book.genre.toLowerCase() == _selectedGenre.toLowerCase();
-      final matchesTingkat = _selectedTingkat == 'Semua tingkat' ||
+      final matchesTingkat =
+          _selectedTingkat == 'Semua tingkat' ||
           book.educationLevel.toLowerCase() == _selectedTingkat.toLowerCase();
       final matchesTahun =
           _selectedTahun == 'Semua tahun' || book.year == _selectedTahun;
@@ -154,8 +105,9 @@ class _DaftarPencarianPageState extends State<DaftarPencarianPage> {
                       option,
                       style: TextStyle(
                         fontSize: 14,
-                        fontWeight:
-                            isSelected ? FontWeight.w600 : FontWeight.w400,
+                        fontWeight: isSelected
+                            ? FontWeight.w600
+                            : FontWeight.w400,
                         color: isSelected ? _accentGreen : _primaryText,
                       ),
                     ),
@@ -181,6 +133,7 @@ class _DaftarPencarianPageState extends State<DaftarPencarianPage> {
     final books = _filteredBooks;
 
     return Scaffold(
+      bottomNavigationBar: Footer(selectedIndex: 1),
       backgroundColor: _bgColor,
       body: SafeArea(
         child: SingleChildScrollView(
@@ -216,18 +169,12 @@ class _DaftarPencarianPageState extends State<DaftarPencarianPage> {
                 decoration: BoxDecoration(
                   color: _bgColor,
                   borderRadius: BorderRadius.circular(12),
-                  border: Border.all(
-                    color: _accentGreen,
-                    width: 1.1,
-                  ),
+                  border: Border.all(color: _accentGreen, width: 1.1),
                 ),
                 child: TextField(
                   controller: _searchController,
                   onChanged: (_) => setState(() {}),
-                  style: const TextStyle(
-                    fontSize: 15,
-                    color: _primaryText,
-                  ),
+                  style: const TextStyle(fontSize: 15, color: _primaryText),
                   decoration: InputDecoration(
                     hintText: 'Cari judul buku atau penulis',
                     hintStyle: const TextStyle(
@@ -386,10 +333,7 @@ class _DaftarPencarianPageState extends State<DaftarPencarianPage> {
                   child: Center(
                     child: Text(
                       'Tidak ada buku yang sesuai dengan pencarian.',
-                      style: TextStyle(
-                        fontSize: 14,
-                        color: _mutedText,
-                      ),
+                      style: TextStyle(fontSize: 14, color: _mutedText),
                     ),
                   ),
                 )
@@ -603,11 +547,7 @@ class _DaftarPencarianPageState extends State<DaftarPencarianPage> {
             ],
           ),
         ),
-        const Divider(
-          color: _dividerColor,
-          thickness: 1,
-          height: 26,
-        ),
+        const Divider(color: _dividerColor, thickness: 1, height: 26),
       ],
     );
   }
@@ -619,10 +559,7 @@ class _CheckmarkPainter extends CustomPainter {
   final Color color;
   final double strokeWidth;
 
-  const _CheckmarkPainter({
-    required this.color,
-    this.strokeWidth = 2.3,
-  });
+  const _CheckmarkPainter({required this.color, this.strokeWidth = 2.3});
 
   @override
   void paint(Canvas canvas, Size size) {

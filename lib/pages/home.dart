@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:literasikuu/book.dart';
 import 'package:literasikuu/footer.dart';
+import 'package:literasikuu/book_repisitory.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -119,9 +121,12 @@ class HomePage extends StatelessWidget {
                 GridView.count(
                   shrinkWrap: true,
                   physics: const NeverScrollableScrollPhysics(),
-                  crossAxisCount: isTablet ? 4 : 4,
-                  crossAxisSpacing: 16,
-                  mainAxisSpacing: 16,
+                  crossAxisCount:
+                      MediaQuery.of(context).orientation == Orientation.portrait
+                      ? 2
+                      : 4,
+                  crossAxisSpacing: 8,
+                  mainAxisSpacing: 8,
                   childAspectRatio: 0.8,
                   children: const [
                     CategoryItem(
@@ -165,30 +170,17 @@ class HomePage extends StatelessWidget {
 
                 SizedBox(
                   height: 330,
-                  child: ListView(
+                  child: ListView.separated(
                     scrollDirection: Axis.horizontal,
-                    children: const [
-                      BookCard(
-                        title: 'Seni Menikmati Sepi',
-                        rating: '4,8',
-                        image: 'https://picsum.photos/200/300?random=1',
-                      ),
-                      SizedBox(width: 16),
-                      BookCard(
-                        title: 'Belajar Cara Belajar',
-                        rating: '4,9',
-                        image: 'https://picsum.photos/200/300?random=2',
-                      ),
-                      SizedBox(width: 16),
-                      BookCard(
-                        title: 'Sains di Sekitar Kita',
-                        rating: '4,8',
-                        image: 'https://picsum.photos/200/300?random=3',
-                      ),
-                    ],
+                    itemCount: BookRepository.books.length,
+                    separatorBuilder: (_, __) => const SizedBox(width: 16),
+                    itemBuilder: (context, index) {
+                      final BookItem book = BookRepository.books[index];
+
+                      return BookCard(book: book);
+                    },
                   ),
                 ),
-
                 const SizedBox(height: 30),
               ],
             );
@@ -228,12 +220,11 @@ class EditorialCard extends StatelessWidget {
                     fontWeight: FontWeight.w600,
                   ),
                 ),
-                const SizedBox(height: 14),
+                const SizedBox(height: 12),
                 const Text(
                   'Ruang tenang,\ngagasan baru.',
                   style: TextStyle(
-                    fontSize: 28,
-                    height: 1.2,
+                    fontSize: 20,
                     fontFamily: 'Serif',
                     color: Color(0xFF445A46),
                   ),
@@ -241,7 +232,7 @@ class EditorialCard extends StatelessWidget {
                 const SizedBox(height: 12),
                 const Text(
                   'Esai untuk merawat jeda dan rasa ingin tahu.',
-                  style: TextStyle(color: Colors.black54, fontSize: 16),
+                  style: TextStyle(color: Colors.black54, fontSize: 14),
                 ),
                 const Spacer(),
                 RichText(
@@ -249,14 +240,14 @@ class EditorialCard extends StatelessWidget {
                     style: TextStyle(
                       color: Color(0xFF445A46),
                       fontWeight: FontWeight.bold,
-                      fontSize: 18,
+                      fontSize: 14,
                     ),
                     children: [
                       TextSpan(text: 'Jelajahi buku '),
                       WidgetSpan(
                         child: Icon(
                           Icons.arrow_forward,
-                          size: 20,
+                          size: 16,
                           color: Color(0xFF445A46),
                         ),
                       ),
@@ -334,16 +325,9 @@ class CategoryItem extends StatelessWidget {
 /// REUSABLE WIDGET - BOOK CARD
 ///
 class BookCard extends StatelessWidget {
-  final String title;
-  final String rating;
-  final String image;
+  final BookItem book;
 
-  const BookCard({
-    super.key,
-    required this.title,
-    required this.rating,
-    required this.image,
-  });
+  const BookCard({super.key, required this.book});
 
   @override
   Widget build(BuildContext context) {
@@ -358,17 +342,24 @@ class BookCard extends StatelessWidget {
             decoration: BoxDecoration(borderRadius: BorderRadius.circular(10)),
             child: ClipRRect(
               borderRadius: BorderRadius.circular(10),
-              child: Image.network(image, fit: BoxFit.cover),
+              child: Image.asset(book.coverAsset, fit: BoxFit.cover),
             ),
           ),
 
           const SizedBox(height: 12),
 
           Text(
-            title,
+            book.title,
             maxLines: 2,
             overflow: TextOverflow.ellipsis,
             style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w700),
+          ),
+
+          const SizedBox(height: 4),
+
+          Text(
+            book.author,
+            style: const TextStyle(fontSize: 14, color: Colors.black54),
           ),
 
           const SizedBox(height: 8),
@@ -378,7 +369,7 @@ class BookCard extends StatelessWidget {
               const Icon(Icons.star, size: 18, color: Color(0xFF445A46)),
               const SizedBox(width: 4),
               Text(
-                rating,
+                book.rating,
                 style: const TextStyle(fontSize: 16, color: Colors.black54),
               ),
             ],

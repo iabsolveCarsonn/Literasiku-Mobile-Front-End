@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-
-void main() {
-  runApp(const MyApp());
-}
+import 'package:literasikuu/footer.dart';
+import 'package:literasikuu/pages/login.dart';
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -37,6 +35,7 @@ class AkunPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      bottomNavigationBar: Footer(selectedIndex: 3),
       body: SafeArea(
         child: SingleChildScrollView(
           child: Padding(
@@ -236,13 +235,20 @@ class AkunPage extends StatelessWidget {
                           ),
                           actions: [
                             TextButton(
-                              onPressed: () =>
-                                  Navigator.pop(context), // Tutup dialog
+                              onPressed: () {
+                                Navigator.pop(context); // Tutup dialog
+                              },
                               child: const Text('Batal'),
                             ),
                             TextButton(
                               onPressed: () {
-                                Navigator.pop(context); // Tutup dialog
+                                Navigator.pop(context);
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (_) => const LoginPage(),
+                                  ),
+                                ); // Tutup dialog
                               },
                               child: const Text(
                                 'Keluar',

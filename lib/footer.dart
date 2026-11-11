@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:literasikuu/pages/pencarian.dart';
+import 'package:literasikuu/pages/daftarpencarian.dart';
 import 'package:literasikuu/pages/bookmark.dart';
 import 'package:literasikuu/pages/akun.dart';
 import 'package:literasikuu/pages/home.dart';
+import 'package:literasikuu/navigation/main_navigation.dart';
 
 class Footer extends StatelessWidget {
   const Footer({super.key, this.selectedIndex = 0});

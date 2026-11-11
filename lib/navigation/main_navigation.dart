@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 
 import '../pages/akun.dart';
 import '../pages/daftarpencarian.dart';
-import '../pages/detailbuku.dart';
 import '../pages/home.dart';
 import '../pages/login.dart';
 
@@ -24,20 +23,22 @@ class AppRoutes {
 
   static const String main = '/';
   static const String login = '/login';
-  static const String detail = '/detail';
+  static const String home = '/home';
+  static const String akun = '/akun';
 
   /// Dipasang di MaterialApp: `routes: AppRoutes.routes`
   static Map<String, WidgetBuilder> get routes => {
-        main: (context) => const MainNavigation(),
-        login: (context) => const LoginPage(),
-        detail: (context) => const DetailBukuPage(),
-      };
+    main: (context) => const MainNavigation(),
+    login: (context) => const LoginPage(),
+    home: (context) => const HomePage(),
+    akun: (context) => const AkunPage(),
+  };
 }
 
 /// Kerangka utama aplikasi dengan bottom navigation bar bersama.
 class MainNavigation extends StatefulWidget {
   /// Tab yang aktif saat pertama dibuka.
-  /// 0 = Home, 1 = Search, 2 = Bookmark, 3 = Acc
+  /// 0 = Home, 1 = Search, 2 = Bookmark, 3 = Akun
   final int initialIndex;
 
   const MainNavigation({super.key, this.initialIndex = 0});
@@ -45,7 +46,9 @@ class MainNavigation extends StatefulWidget {
   /// Pindah tab dari halaman mana pun di dalam MainNavigation, contoh:
   /// `MainNavigation.goTo(context, 3);` untuk membuka tab Acc.
   static void goTo(BuildContext context, int index) {
-    context.findAncestorStateOfType<_MainNavigationState>()?._onTabSelected(index);
+    context.findAncestorStateOfType<_MainNavigationState>()?._onTabSelected(
+      index,
+    );
   }
 
   @override
@@ -74,10 +77,7 @@ class _MainNavigationState extends State<MainNavigation> {
       selectedIcon: Icon(Icons.home_rounded),
       label: 'Home',
     ),
-    NavigationDestination(
-      icon: Icon(Icons.search_rounded),
-      label: 'Search',
-    ),
+    NavigationDestination(icon: Icon(Icons.search_rounded), label: 'Search'),
     NavigationDestination(
       icon: Icon(Icons.bookmark_border_rounded),
       selectedIcon: Icon(Icons.bookmark_rounded),
@@ -106,10 +106,7 @@ class _MainNavigationState extends State<MainNavigation> {
     return Scaffold(
       // IndexedStack menjaga state tiap halaman, misalnya teks pencarian
       // dan filter di halaman Search tidak hilang saat pindah tab.
-      body: IndexedStack(
-        index: _currentIndex,
-        children: _pages,
-      ),
+      body: IndexedStack(index: _currentIndex, children: _pages),
       bottomNavigationBar: Container(
         decoration: const BoxDecoration(
           border: Border(top: BorderSide(color: _pillBg, width: 1.2)),

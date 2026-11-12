@@ -162,7 +162,7 @@ class AkunPage extends StatelessWidget {
                   icon: Icons.school_outlined,
                   title: 'Tingkat pendidikan',
                   trailingText:
-                      'Mahasiswa', // Lebih spesifik dari sekadar 'Umum'
+                      'Umum', //  'Umum'
                   showDivider: true,
                 ),
                 _buildMenuItem(
@@ -264,7 +264,7 @@ class AkunPage extends StatelessWidget {
                 // --- 7. Footer Version ---
                 Center(
                   child: Text(
-                    'Opik - Ruang untuk bertumbuh - Versi 1.0',
+                    'Literasiku - Ruang untuk bertumbuh - Versi 1.0',
                     style: TextStyle(fontSize: 12, color: greyText),
                   ),
                 ),

@@ -5,7 +5,7 @@ import 'register.dart'; // Menghubungkan ke halaman register
 /// Penyimpanan akun sementara (in-memory) untuk Login & Register
 class DummyAuth {
   static final Map<String, String> accounts = {
-    'pembaca@literasiku.com': 'literasi123', // Akun default
+    'ayu.pratiwi@email.com': 'ayu123', // Akun default
   };
 
   static bool login(String email, String password) {
@@ -65,9 +65,7 @@ class _LoginPageState extends State<LoginPage> {
     } else {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
-          content: Text(
-            'Email atau kata sandi salah. Coba: pembaca@literasiku.com / literasi123',
-          ),
+          content: Text('Email atau kata sandi salah.'),
           backgroundColor: Colors.redAccent,
         ),
       );
@@ -223,8 +221,7 @@ class _LoginPageState extends State<LoginPage> {
                                               keyboardType:
                                                   TextInputType.emailAddress,
                                               decoration: InputDecoration(
-                                                hintText:
-                                                    'pembaca@literasiku.com',
+                                                hintText: 'email',
                                                 hintStyle: TextStyle(
                                                   color: Colors.grey.shade400,
                                                   fontSize: 14,

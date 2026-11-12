@@ -5,7 +5,7 @@ import 'register.dart'; // Menghubungkan ke halaman register
 /// Penyimpanan akun sementara (in-memory) untuk Login & Register
 class DummyAuth {
   static final Map<String, String> accounts = {
-    'ayu.pratiwi@email.com': 'ayu123', // Akun default
+    'ayu.pratiwi@email.com': 'ayu12345678', // Akun default
   };
 
   static bool login(String email, String password) {

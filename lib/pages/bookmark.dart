@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:literasikuu/book.dart';
 import 'package:literasikuu/book_repisitory.dart';
+import 'package:literasikuu/pages/detailbuku.dart';
 
 class BookmarkPage extends StatefulWidget {
   const BookmarkPage({super.key});
@@ -202,7 +203,18 @@ class _BookmarkPageState extends State<BookmarkPage> {
   }
 
   Widget _bookItem(BookItem book) {
-    return Container(
+    return InkWell(
+      borderRadius: BorderRadius.circular(10),
+      onTap: () async {
+        await Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => DetailBukuPage(book: book),
+          ),
+        );
+        setState(() {});
+      },
+      child: Container(
       margin: const EdgeInsets.only(bottom: 24),
       padding: const EdgeInsets.only(bottom: 20),
       decoration: BoxDecoration(
@@ -212,7 +224,7 @@ class _BookmarkPageState extends State<BookmarkPage> {
         children: [
           ClipRRect(
             borderRadius: BorderRadius.circular(10),
-            child: Image.network(
+            child: Image.asset(
               book.coverAsset,
               width: 90,
               height: 130,
@@ -287,6 +299,7 @@ class _BookmarkPageState extends State<BookmarkPage> {
             },
           ),
         ],
+      ),
       ),
     );
   }

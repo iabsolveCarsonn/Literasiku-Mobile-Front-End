@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:literasikuu/book.dart';
 import 'package:literasikuu/book_repisitory.dart';
+import 'package:literasikuu/pages/detailbuku.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -329,7 +330,17 @@ class BookCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
+    return InkWell(
+      borderRadius: BorderRadius.circular(10),
+      onTap: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => DetailBukuPage(book: book),
+          ),
+        );
+      },
+      child: SizedBox(
       width: 195,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -374,6 +385,7 @@ class BookCard extends StatelessWidget {
           ),
         ],
       ),
+    ),
     );
   }
 }

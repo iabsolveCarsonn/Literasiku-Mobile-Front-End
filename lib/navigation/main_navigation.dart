@@ -3,6 +3,7 @@ import 'package:literasikuu/pages/bookmark.dart';
 
 import '../pages/akun.dart';
 import '../pages/daftarpencarian.dart';
+import '../pages/detailbuku.dart';
 import '../pages/home.dart';
 import '../pages/login.dart';
 
@@ -26,6 +27,7 @@ class AppRoutes {
   static const String login = '/login';
   static const String home = '/home';
   static const String akun = '/akun';
+  static const String detail = '/detail';
   static const String bookmark = '/bookmark';
   static const String pancarian = '/pencarian';
 
@@ -35,6 +37,7 @@ class AppRoutes {
     login: (context) => const LoginPage(),
     home: (context) => const HomePage(),
     akun: (context) => const AkunPage(),
+    detail: (context) => const DetailBukuPage(),
     bookmark: (context) => const BookmarkPage(),
     pancarian: (context) => const DaftarPencarianPage(),
   };

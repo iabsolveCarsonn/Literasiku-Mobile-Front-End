@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:literasikuu/book.dart';
 import 'package:literasikuu/book_repisitory.dart';
+import 'package:literasikuu/pages/detailbuku.dart';
 
 class DaftarPencarianPage extends StatefulWidget {
   const DaftarPencarianPage({super.key});
@@ -381,7 +382,18 @@ class _DaftarPencarianPageState extends State<DaftarPencarianPage> {
   Widget _buildBookCard(BookItem book) {
     return Column(
       children: [
-        Padding(
+        InkWell(
+          borderRadius: BorderRadius.circular(8),
+          onTap: () async {
+            await Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => DetailBukuPage(book: book),
+              ),
+            );
+            setState(() {});
+          },
+          child: Padding(
           padding: const EdgeInsets.symmetric(vertical: 4),
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.center,
@@ -521,6 +533,7 @@ class _DaftarPencarianPageState extends State<DaftarPencarianPage> {
               ),
             ],
           ),
+        ),
         ),
         const Divider(color: _dividerColor, thickness: 1, height: 26),
       ],

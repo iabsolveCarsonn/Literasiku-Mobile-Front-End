@@ -343,7 +343,9 @@ class _LoginPageState extends State<LoginPage> {
                                                   ),
                                                   elevation: 0,
                                                 ),
-                                                onPressed: () {},
+                                                onPressed: () {
+                                                  Navigator.pushReplacementNamed(context, '/');
+                                                },
                                                 child: Row(
                                                   mainAxisAlignment:
                                                       MainAxisAlignment.center,

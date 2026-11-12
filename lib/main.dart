@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'pages/login.dart';
+import 'navigation/main_navigation.dart';
 
 void main() {
   runApp(const LiterasikuApp());
@@ -22,9 +22,8 @@ class LiterasikuApp extends StatelessWidget {
         ),
         useMaterial3: true,
       ),
-      // initialRoute: AppRoutes.main,
-      // routes: AppRoutes.routes,
-      home: const LoginPage(),
+      initialRoute: AppRoutes.login,
+      routes: AppRoutes.routes,
     );
   }
 }

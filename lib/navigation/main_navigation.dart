@@ -71,14 +71,6 @@ class _MainNavigationState extends State<MainNavigation> {
 
   late int _currentIndex;
 
-  /// Urutan halaman harus sama dengan urutan [_destinations].
-  final List<Widget> _pages = const [
-    HomePage(),
-    DaftarPencarianPage(),
-    _BookmarkPlaceholder(),
-    AkunPage(),
-  ];
-
   static const List<NavigationDestination> _destinations = [
     NavigationDestination(
       icon: Icon(Icons.home_outlined),
@@ -101,7 +93,7 @@ class _MainNavigationState extends State<MainNavigation> {
   @override
   void initState() {
     super.initState();
-    _currentIndex = widget.initialIndex.clamp(0, _pages.length - 1);
+    _currentIndex = widget.initialIndex.clamp(0, _destinations.length - 1);
   }
 
   void _onTabSelected(int index) {
@@ -111,10 +103,20 @@ class _MainNavigationState extends State<MainNavigation> {
 
   @override
   Widget build(BuildContext context) {
+    // Urutan halaman sesuai dengan urutan [_destinations].
+    final pages = <Widget>[
+      const HomePage(),
+      // Non-const agar status bookmark selalu sinkron saat berpindah tab
+      // antara Search dan Bookmark tanpa menghilangkan state halaman.
+      // ignore: prefer_const_constructors
+      DaftarPencarianPage(),
+      // ignore: prefer_const_constructors
+      BookmarkPage(),
+      const AkunPage(),
+    ];
+
     return Scaffold(
-      // IndexedStack menjaga state tiap halaman, misalnya teks pencarian
-      // dan filter di halaman Search tidak hilang saat pindah tab.
-      body: IndexedStack(index: _currentIndex, children: _pages),
+      body: IndexedStack(index: _currentIndex, children: pages),
       bottomNavigationBar: Container(
         decoration: const BoxDecoration(
           border: Border(top: BorderSide(color: _pillBg, width: 1.2)),
@@ -148,23 +150,6 @@ class _MainNavigationState extends State<MainNavigation> {
             height: 68,
             destinations: _destinations,
           ),
-        ),
-      ),
-    );
-  }
-}
-
-/// Halaman sementara untuk tab Bookmark karena belum ada file halamannya.
-class _BookmarkPlaceholder extends StatelessWidget {
-  const _BookmarkPlaceholder();
-
-  @override
-  Widget build(BuildContext context) {
-    return const Scaffold(
-      body: Center(
-        child: Text(
-          'Halaman Bookmark',
-          style: TextStyle(fontSize: 16, color: Color(0xFF727769)),
         ),
       ),
     );

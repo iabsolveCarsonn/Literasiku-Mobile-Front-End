@@ -199,7 +199,9 @@ class _LoginPageState extends State<LoginPage> {
                                                   shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(6)),
                                                   elevation: 0,
                                                 ),
-                                                onPressed: () {},
+                                                onPressed: () {
+                                                  Navigator.pushReplacementNamed(context, '/');
+                                                },
                                                 child: Row(
                                                   mainAxisAlignment: MainAxisAlignment.center,
                                                   children: const [

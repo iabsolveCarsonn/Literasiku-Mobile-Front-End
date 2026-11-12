@@ -95,22 +95,6 @@ class _DaftarPencarianPageState extends State<DaftarPencarianPage> {
     ),
   ];
 
-  List<BookItem> get _filteredBooks {
-    final query = _searchController.text.trim().toLowerCase();
-    return _allBooks.where((book) {
-      final matchesQuery = query.isEmpty ||
-          book.title.toLowerCase().contains(query) ||
-          book.author.toLowerCase().contains(query);
-      final matchesGenre = _selectedGenre == 'Semua genre' ||
-          book.genre.toLowerCase() == _selectedGenre.toLowerCase();
-      final matchesTingkat = _selectedTingkat == 'Semua tingkat' ||
-          book.educationLevel.toLowerCase() == _selectedTingkat.toLowerCase();
-      final matchesTahun =
-          _selectedTahun == 'Semua tahun' || book.year == _selectedTahun;
-      return matchesQuery && matchesGenre && matchesTingkat && matchesTahun;
-    }).toList();
-  }
-
   @override
   void dispose() {
     _searchController.dispose();
@@ -178,8 +162,6 @@ class _DaftarPencarianPageState extends State<DaftarPencarianPage> {
 
   @override
   Widget build(BuildContext context) {
-    final books = _filteredBooks;
-
     return Scaffold(
       backgroundColor: _bgColor,
       body: SafeArea(
@@ -210,7 +192,7 @@ class _DaftarPencarianPageState extends State<DaftarPencarianPage> {
               ),
               const SizedBox(height: 18),
 
-              // Kolom Pencarian
+              // Kolom Pencarian (Tampilan Depan)
               Container(
                 height: 52,
                 decoration: BoxDecoration(
@@ -223,7 +205,6 @@ class _DaftarPencarianPageState extends State<DaftarPencarianPage> {
                 ),
                 child: TextField(
                   controller: _searchController,
-                  onChanged: (_) => setState(() {}),
                   style: const TextStyle(
                     fontSize: 15,
                     color: _primaryText,
@@ -247,19 +228,16 @@ class _DaftarPencarianPageState extends State<DaftarPencarianPage> {
                       minWidth: 44,
                       minHeight: 44,
                     ),
-                    suffixIcon: _searchController.text.isNotEmpty
-                        ? IconButton(
-                            onPressed: () {
-                              _searchController.clear();
-                              setState(() {});
-                            },
-                            icon: const Icon(
-                              Icons.close_rounded,
-                              color: _mutedText,
-                              size: 20,
-                            ),
-                          )
-                        : null,
+                    suffixIcon: IconButton(
+                      onPressed: () {
+                        _searchController.clear();
+                      },
+                      icon: const Icon(
+                        Icons.close_rounded,
+                        color: _mutedText,
+                        size: 20,
+                      ),
+                    ),
                     border: InputBorder.none,
                     contentPadding: const EdgeInsets.symmetric(
                       vertical: 14,
@@ -354,12 +332,12 @@ class _DaftarPencarianPageState extends State<DaftarPencarianPage> {
               const SizedBox(height: 24),
 
               // Header Hasil Pencarian
-              Row(
+              const Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 crossAxisAlignment: CrossAxisAlignment.baseline,
                 textBaseline: TextBaseline.alphabetic,
                 children: [
-                  const Text(
+                  Text(
                     'Hasil pencarian',
                     style: TextStyle(
                       fontSize: 16,
@@ -368,8 +346,8 @@ class _DaftarPencarianPageState extends State<DaftarPencarianPage> {
                     ),
                   ),
                   Text(
-                    '${books.length} buku · Paling relevan',
-                    style: const TextStyle(
+                    '3 buku · Paling relevan',
+                    style: TextStyle(
                       fontSize: 13,
                       fontWeight: FontWeight.w400,
                       color: _mutedText,
@@ -379,22 +357,8 @@ class _DaftarPencarianPageState extends State<DaftarPencarianPage> {
               ),
               const SizedBox(height: 16),
 
-              // Daftar Buku
-              if (books.isEmpty)
-                const Padding(
-                  padding: EdgeInsets.symmetric(vertical: 36),
-                  child: Center(
-                    child: Text(
-                      'Tidak ada buku yang sesuai dengan pencarian.',
-                      style: TextStyle(
-                        fontSize: 14,
-                        color: _mutedText,
-                      ),
-                    ),
-                  ),
-                )
-              else
-                ...books.map((book) => _buildBookCard(book)),
+              // Daftar Buku (Tampilan Depan Statis)
+              ..._allBooks.map((book) => _buildBookCard(book)),
             ],
           ),
         ),

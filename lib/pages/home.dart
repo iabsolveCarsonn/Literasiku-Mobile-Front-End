@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:literasikuu/book.dart';
-import 'package:literasikuu/footer.dart';
 import 'package:literasikuu/book_repisitory.dart';
 
 class HomePage extends StatelessWidget {

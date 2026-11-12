@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:literasikuu/footer.dart';
 import 'package:literasikuu/book.dart';
 import 'package:literasikuu/book_repisitory.dart';
 
@@ -42,25 +41,6 @@ class _DaftarPencarianPageState extends State<DaftarPencarianPage> {
   final List<String> _tahunOptions = ['Semua tahun', '2025', '2024', '2023'];
 
   List<BookItem> get _allBooks => BookRepository.books;
-
-  List<BookItem> get _filteredBooks {
-    final query = _searchController.text.trim().toLowerCase();
-    return _allBooks.where((book) {
-      final matchesQuery =
-          query.isEmpty ||
-          book.title.toLowerCase().contains(query) ||
-          book.author.toLowerCase().contains(query);
-      final matchesGenre =
-          _selectedGenre == 'Semua genre' ||
-          book.genre.toLowerCase() == _selectedGenre.toLowerCase();
-      final matchesTingkat =
-          _selectedTingkat == 'Semua tingkat' ||
-          book.educationLevel.toLowerCase() == _selectedTingkat.toLowerCase();
-      final matchesTahun =
-          _selectedTahun == 'Semua tahun' || book.year == _selectedTahun;
-      return matchesQuery && matchesGenre && matchesTingkat && matchesTahun;
-    }).toList();
-  }
 
   @override
   void dispose() {
@@ -131,7 +111,7 @@ class _DaftarPencarianPageState extends State<DaftarPencarianPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      bottomNavigationBar: Footer(selectedIndex: 1),
+      // bottomNavigationBar: Footer(selectedIndex: 1),
       backgroundColor: _bgColor,
       body: SafeArea(
         child: SingleChildScrollView(

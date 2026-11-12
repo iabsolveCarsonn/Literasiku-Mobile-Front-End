@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:literasikuu/footer.dart';
 import 'package:literasikuu/pages/login.dart';
 
 class MyApp extends StatelessWidget {

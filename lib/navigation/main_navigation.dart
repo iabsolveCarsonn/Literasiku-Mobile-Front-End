@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:literasikuu/pages/bookmark.dart';
 
 import '../pages/akun.dart';
 import '../pages/daftarpencarian.dart';
@@ -25,6 +26,8 @@ class AppRoutes {
   static const String login = '/login';
   static const String home = '/home';
   static const String akun = '/akun';
+  static const String bookmark = '/bookmark';
+  static const String pancarian = '/pencarian';
 
   /// Dipasang di MaterialApp: `routes: AppRoutes.routes`
   static Map<String, WidgetBuilder> get routes => {
@@ -32,6 +35,8 @@ class AppRoutes {
     login: (context) => const LoginPage(),
     home: (context) => const HomePage(),
     akun: (context) => const AkunPage(),
+    bookmark: (context) => const BookmarkPage(),
+    pancarian: (context) => const DaftarPencarianPage(),
   };
 }
 

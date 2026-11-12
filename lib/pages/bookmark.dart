@@ -162,7 +162,7 @@ class _BookmarkPageState extends State<BookmarkPage> {
                   ),
                 )
               else
-                ...bookmarkedBooks.map((book) => _bookItem(book)).toList(),
+                ...bookmarkedBooks.map((book) => _bookItem(book)),
 
               const SizedBox(height: 12),
 

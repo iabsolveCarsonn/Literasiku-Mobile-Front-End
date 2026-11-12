@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'login.dart'; // Mengakses DummyAuth
 
 class RegisterPage extends StatefulWidget {
   const RegisterPage({super.key});
@@ -27,6 +28,53 @@ class _RegisterPageState extends State<RegisterPage> {
     super.dispose();
   }
 
+  void _handleRegister() {
+    final name = _nameController.text.trim();
+    final email = _emailController.text.trim();
+    final password = _passwordController.text;
+    final confirmPassword = _confirmPasswordController.text;
+
+    if (name.isEmpty || email.isEmpty || password.isEmpty) {
+      _showMessage('Semua kolom wajib diisi.', isError: true);
+      return;
+    }
+
+    if (password.length < 8) {
+      _showMessage('Kata sandi minimal 8 karakter.', isError: true);
+      return;
+    }
+
+    if (password != confirmPassword) {
+      _showMessage('Konfirmasi kata sandi tidak cocok.', isError: true);
+      return;
+    }
+
+    if (!_agreeTerms) {
+      _showMessage(
+        'Harap setujui Syarat & ketentuan terlebih dahulu.',
+        isError: true,
+      );
+      return;
+    }
+
+    final success = DummyAuth.register(email, password);
+    if (success) {
+      _showMessage('Pendaftaran berhasil! Silakan masuk dengan akunmu.');
+      Navigator.pop(context); // Kembali ke halaman Login
+    } else {
+      _showMessage('Email sudah terdaftar. Gunakan email lain.', isError: true);
+    }
+  }
+
+  void _showMessage(String text, {bool isError = false}) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text(text),
+        backgroundColor: isError ? Colors.redAccent : const Color(0xFF344936),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     final Color darkGreen = const Color(0xFF344936);
@@ -44,9 +92,7 @@ class _RegisterPageState extends State<RegisterPage> {
                 child: Center(
                   child: Container(
                     width: double.infinity,
-                    constraints: const BoxConstraints(
-                      maxWidth: 480,
-                    ), // Membatasi lebar agar tetap proporsional
+                    constraints: const BoxConstraints(maxWidth: 480),
                     padding: const EdgeInsets.symmetric(
                       horizontal: 16.0,
                       vertical: 20.0,
@@ -62,7 +108,7 @@ class _RegisterPageState extends State<RegisterPage> {
                                 color: Colors.white,
                                 boxShadow: [
                                   BoxShadow(
-                                    color: Colors.black.withValues(alpha: 0.05),
+                                    color: Colors.black.withOpacity(0.05),
                                     blurRadius: 10,
                                     offset: const Offset(0, 4),
                                   ),
@@ -80,15 +126,11 @@ class _RegisterPageState extends State<RegisterPage> {
                                         color: lightGreen,
                                         border: Border(
                                           left: BorderSide(
-                                            color: darkGreen.withValues(
-                                              alpha: 0.3,
-                                            ),
+                                            color: darkGreen.withOpacity(0.3),
                                             width: 4,
                                           ),
                                           right: BorderSide(
-                                            color: darkGreen.withValues(
-                                              alpha: 0.8,
-                                            ),
+                                            color: darkGreen.withOpacity(0.8),
                                             width: 1.5,
                                           ),
                                         ),
@@ -216,6 +258,8 @@ class _RegisterPageState extends State<RegisterPage> {
                                             const SizedBox(height: 4),
                                             TextFormField(
                                               controller: _emailController,
+                                              keyboardType:
+                                                  TextInputType.emailAddress,
                                               decoration: InputDecoration(
                                                 hintText: 'nama@email.com',
                                                 hintStyle: TextStyle(
@@ -465,7 +509,7 @@ class _RegisterPageState extends State<RegisterPage> {
                                                   ),
                                                   elevation: 0,
                                                 ),
-                                                onPressed: () {},
+                                                onPressed: _handleRegister,
                                                 child: Row(
                                                   mainAxisAlignment:
                                                       MainAxisAlignment.center,

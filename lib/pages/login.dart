@@ -1,5 +1,25 @@
 import 'package:flutter/material.dart';
+import '../navigation/main_navigation.dart'; // Menghubungkan ke MainNavigation
 import 'register.dart'; // Menghubungkan ke halaman register
+
+/// Penyimpanan akun sementara (in-memory) untuk Login & Register
+class DummyAuth {
+  static final Map<String, String> accounts = {
+    'pembaca@literasiku.com': 'literasi123', // Akun default
+  };
+
+  static bool login(String email, String password) {
+    final cleanEmail = email.trim().toLowerCase();
+    return accounts.containsKey(cleanEmail) && accounts[cleanEmail] == password;
+  }
+
+  static bool register(String email, String password) {
+    final cleanEmail = email.trim().toLowerCase();
+    if (accounts.containsKey(cleanEmail)) return false;
+    accounts[cleanEmail] = password;
+    return true;
+  }
+}
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -22,6 +42,38 @@ class _LoginPageState extends State<LoginPage> {
     super.dispose();
   }
 
+  void _handleLogin() {
+    final email = _emailController.text.trim();
+    final password = _passwordController.text;
+
+    if (email.isEmpty || password.isEmpty) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text('Harap isi alamat email dan kata sandi.'),
+          backgroundColor: Colors.redAccent,
+        ),
+      );
+      return;
+    }
+
+    if (DummyAuth.login(email, password)) {
+      // Masuk ke MainNavigation dan menghapus halaman Login dari riwayat back
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (context) => const MainNavigation()),
+      );
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text(
+            'Email atau kata sandi salah. Coba: pembaca@literasiku.com / literasi123',
+          ),
+          backgroundColor: Colors.redAccent,
+        ),
+      );
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     final Color darkGreen = const Color(0xFF344936);
@@ -39,9 +91,7 @@ class _LoginPageState extends State<LoginPage> {
                 child: Center(
                   child: Container(
                     width: double.infinity,
-                    constraints: const BoxConstraints(
-                      maxWidth: 480,
-                    ), // Membatasi lebar maksimum di layar besar/web
+                    constraints: const BoxConstraints(maxWidth: 480),
                     padding: const EdgeInsets.symmetric(
                       horizontal: 16.0,
                       vertical: 20.0,
@@ -87,7 +137,7 @@ class _LoginPageState extends State<LoginPage> {
                                 color: Colors.white,
                                 boxShadow: [
                                   BoxShadow(
-                                    color: Colors.black.withValues(alpha: 0.05),
+                                    color: Colors.black.withOpacity(0.05),
                                     blurRadius: 10,
                                     offset: const Offset(0, 4),
                                   ),
@@ -105,15 +155,11 @@ class _LoginPageState extends State<LoginPage> {
                                         color: lightGreen,
                                         border: Border(
                                           left: BorderSide(
-                                            color: darkGreen.withValues(
-                                              alpha: 0.3,
-                                            ),
+                                            color: darkGreen.withOpacity(0.3),
                                             width: 4,
                                           ),
                                           right: BorderSide(
-                                            color: darkGreen.withValues(
-                                              alpha: 0.8,
-                                            ),
+                                            color: darkGreen.withOpacity(0.8),
                                             width: 1.5,
                                           ),
                                         ),
@@ -174,8 +220,11 @@ class _LoginPageState extends State<LoginPage> {
                                             const SizedBox(height: 6),
                                             TextFormField(
                                               controller: _emailController,
+                                              keyboardType:
+                                                  TextInputType.emailAddress,
                                               decoration: InputDecoration(
-                                                hintText: 'nama@email.com',
+                                                hintText:
+                                                    'pembaca@literasiku.com',
                                                 hintStyle: TextStyle(
                                                   color: Colors.grey.shade400,
                                                   fontSize: 14,
@@ -343,9 +392,7 @@ class _LoginPageState extends State<LoginPage> {
                                                   ),
                                                   elevation: 0,
                                                 ),
-                                                onPressed: () {
-                                                  Navigator.pushReplacementNamed(context, '/');
-                                                },
+                                                onPressed: _handleLogin,
                                                 child: Row(
                                                   mainAxisAlignment:
                                                       MainAxisAlignment.center,

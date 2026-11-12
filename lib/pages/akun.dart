@@ -35,7 +35,7 @@ class AkunPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      bottomNavigationBar: Footer(selectedIndex: 3),
+      // bottomNavigationBar: Footer(selectedIndex: 3),
       body: SafeArea(
         child: SingleChildScrollView(
           child: Padding(
@@ -159,8 +159,7 @@ class AkunPage extends StatelessWidget {
                   context,
                   icon: Icons.school_outlined,
                   title: 'Tingkat pendidikan',
-                  trailingText:
-                      'Umum', //  'Umum'
+                  trailingText: 'Umum', //  'Umum'
                   showDivider: true,
                 ),
                 _buildMenuItem(

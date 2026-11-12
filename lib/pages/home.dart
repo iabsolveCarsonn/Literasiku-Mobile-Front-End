@@ -14,7 +14,6 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     // final size = MediaQuery.of(context).size;
     return Scaffold(
-      bottomNavigationBar: Footer(selectedIndex: 0),
       body: SafeArea(
         child: LayoutBuilder(
           builder: (context, constraints) {

@@ -198,7 +198,7 @@ class _BookmarkPageState extends State<BookmarkPage> {
           ),
         ),
       ),
-      bottomNavigationBar: const Footer(selectedIndex: 2),
+      // bottomNavigationBar: const Footer(selectedIndex: 2),
     );
   }
 
